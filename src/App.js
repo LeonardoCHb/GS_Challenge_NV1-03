@@ -28,7 +28,12 @@ export default function App() {
     <>
       <StatusBar barStyle="light-content" backgroundColor="#7159c1" />
       <SafeAreaView style={styles.container}>
-        <View style={styles.repositoryContainer}>
+        <FlatList 
+        style={styles.repositoryContainer}
+        data={repositories}
+        key={repository => repository.id}
+        ????????
+        >
           <Text style={styles.repository}>Repository 1</Text>
 
           <View style={styles.techsContainer}>
@@ -58,7 +63,7 @@ export default function App() {
           >
             <Text style={styles.buttonText}>Curtir</Text>
           </TouchableOpacity>
-        </View>
+        </FlatList>
       </SafeAreaView>
     </>
   );

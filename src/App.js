@@ -21,13 +21,13 @@ export default function App() {
   }, [])
 
   async function handleLikeRepository(id) {
-    const response = await api.post(`repositories/${id}/likes`)
+    const response = await api.post(`repositories/${id}/like`)
 
-    const repositoryLike= response.data
+    const likes= response.data.likes
 
     const Updated = repositories.map(repository => {
       if(repository.id === id){
-        return  repositoryLike
+        return  { ...repository, likes}
       }
       else {
         return repository
@@ -44,7 +44,7 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         <FlatList
           data={repositories}
-          key={repository => repository.id}
+          keyExtractor={repository => repository.id}
           renderItem={({ item: repository }) => (
             <View style={styles.repositoryContainer}>
               <Text style={styles.repository}>{repository.title}</Text>
@@ -56,9 +56,7 @@ export default function App() {
                   </Text>
                 ))}
 
-                <Text style={styles.tech}>
-                  Node.js
-            </Text>
+                
               </View>
 
               <View style={styles.likesContainer}>
